@@ -272,10 +272,10 @@ class Menu:
         fen.game()
         
     def regles(self, event = None):
-        f_regles = tk.Toplevel()
-        meme = tk.PhotoImage(file ='emoji.png')
+        f_regles = Toplevel()
+        meme = PhotoImage(file ='emoji.png')
         f_regles.geometry(f"{meme.width()}x{meme.height()}")
-        label= tk.Label(f_regles,image = meme)
+        label= Label(f_regles,image = meme)
         #label.place(x=0, y=0, relwidth=1, relheight=1)
         label.pack()
         f_regles.mainloop()
@@ -291,4 +291,5 @@ if __name__ == "__main__":
     """Point d'entrée du programme"""
     root = Tk()
     Menu(root, None)
+
 
