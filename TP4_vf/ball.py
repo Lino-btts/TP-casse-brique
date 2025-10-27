@@ -1,6 +1,13 @@
-import tkinter as tk
-import random
-import math
+# codé en utf 8
+# Date : du 06/10/2025 au 27/10/2025 
+# Auteurs : Rayane Chekatt / Lino Battesti
+# Le programme permet de créer la balle, son mouvement et ses collisions avec la fenetre
+# To do list : None
+
+
+from tkinter import Canvas
+from random import uniform
+from math import pi, cos, sin
 
 # --- Constantes globales ---
 WINDOW_WIDTH = 800
@@ -11,10 +18,10 @@ ball_r = 8
 class Ball:
     """Classe représentant la balle du casse-brique."""
 
-    def __init__(self, canvas, ball_r):
+    def __init__(self, canvas: Canvas, ball_r: int):
         """
         Entrée :
-            - canvas (tk.Canvas) : zone de dessin
+            - canvas (Canvas) : zone de dessin
             - ball_r (int) : rayon de la balle
         Sortie : None
         But : initialiser la balle avec une direction et une vitesse aléatoires
@@ -23,21 +30,23 @@ class Ball:
         self.__r = ball_r
 
         # Vitesse et direction initiales aléatoires
-        self.__velocity = random.uniform(1.8, 2) * 3
-        self.__angle = random.uniform(0, 2 * math.pi)
+        self.__velocity = uniform(1.8, 2) * 3
+        self.__angle = uniform(0, 2 * pi)
 
         # Position initiale (au centre)
         self.__x = WINDOW_WIDTH / 2
         self.__y = WINDOW_HEIGHT / 2
 
         # Composantes du déplacement
-        self.__dx = self.__velocity * math.cos(self.__angle)
-        self.__dy = self.__velocity * math.sin(self.__angle)
+        self.__dx = self.__velocity * cos(self.__angle)
+        self.__dy = self.__velocity * sin(self.__angle)
 
         # Création de l’ovale représentant la balle
-        self.__ball = canvas.create_oval(self.__x - self.__r, self.__y - self.__r,
-                                         self.__x + self.__r, self.__y + self.__r,
-                                         width=5, fill='white')
+        self.__ball = canvas.create_oval(
+            self.__x - self.__r, self.__y - self.__r,
+            self.__x + self.__r, self.__y + self.__r,
+            width=5, fill='white'
+        )
 
     def reset_pos(self):
         """
@@ -47,10 +56,10 @@ class Ball:
         """
         self.__x = WINDOW_WIDTH / 2
         self.__y = WINDOW_HEIGHT / 2
-        self.__velocity = random.uniform(1.8, 2) * 3
-        self.__angle = random.uniform(1, 2 * math.pi - 1)
-        self.__dx = self.__velocity * math.cos(self.__angle)
-        self.__dy = self.__velocity * math.sin(self.__angle)
+        self.__velocity = uniform(1.8, 2) * 3
+        self.__angle = uniform(1, 2 * pi - 1)
+        self.__dx = self.__velocity * cos(self.__angle)
+        self.__dy = self.__velocity * sin(self.__angle)
 
     def update(self):
         """
@@ -65,12 +74,12 @@ class Ball:
 
         # Collision mur gauche
         if self.__x - self.__r + self.__dx < 0:
-            self.__x = 2 * (self.__r) - self.__x
+            self.__x = 2 * self.__r - self.__x
             self.__dx = -self.__dx
 
         # Collision plafond
         if self.__y - self.__r + self.__dy < 0:
-            self.__y = 2 * (self.__r) - self.__y
+            self.__y = 2 * self.__r - self.__y
             self.__dy = -self.__dy  # inversion du sens vertical
 
         # Mise à jour des coordonnées
@@ -78,9 +87,11 @@ class Ball:
         self.__y += self.__dy
 
         # Mise à jour de la position graphique sur le canvas
-        self.canvas.coords(self.__ball,
-                           self.__x - self.__r, self.__y - self.__r,
-                           self.__x + self.__r, self.__y + self.__r)
+        self.canvas.coords(
+            self.__ball,
+            self.__x - self.__r, self.__y - self.__r,
+            self.__x + self.__r, self.__y + self.__r
+        )
 
     def coords(self):
         """Entrée : None | Sortie : liste [x1, y1, x2, y2] | But : renvoyer les coordonnées de la balle"""
