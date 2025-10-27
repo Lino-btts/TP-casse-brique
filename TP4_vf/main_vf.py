@@ -255,7 +255,7 @@ class Menu:
             bg='#f86a00', font=("Helvetica", 14),
             fg='#00006c', justify='center'
         ).place(x=self.__largeur / 2 - 200, y=self.__hauteur - 30)
-
+        self.__window.bind('<o>',self.regles)
         self.__window.mainloop()
 
     def difficulty(self):
@@ -270,7 +270,16 @@ class Menu:
         """Lance la partie avec la difficulté choisie."""
         fen = Fenetre(self.__window, self.__difficulty)
         fen.game()
-
+        
+    def regles(self, event = None):
+        f_regles = tk.Toplevel()
+        meme = tk.PhotoImage(file ='emoji.png')
+        f_regles.geometry(f"{meme.width()}x{meme.height()}")
+        label= tk.Label(f_regles,image = meme)
+        #label.place(x=0, y=0, relwidth=1, relheight=1)
+        label.pack()
+        f_regles.mainloop()
+        
     def get_score(self):
         """Lit les 10 derniers scores depuis le fichier CSV."""
         with open("score.csv", mode="r", encoding="utf-8") as fichier:
@@ -282,3 +291,4 @@ if __name__ == "__main__":
     """Point d'entrée du programme"""
     root = Tk()
     Menu(root, None)
+
