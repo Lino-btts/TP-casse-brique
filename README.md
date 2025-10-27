@@ -23,6 +23,8 @@ Utilisation de file et de pile :
  
   pile : pile contenant les vies 
 
+  Règles du jeu : appuyer sur "o" pour afficher les règles du jeu
+
 Lien github :
   
   https://github.com/Lino-btts/TP-casse-brique
