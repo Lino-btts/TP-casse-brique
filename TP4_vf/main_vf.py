@@ -273,7 +273,7 @@ class Menu:
                                                command=self.difficulty2)
         self.__boutton_difficulty2.place(x=self.__largeur*(2/5) + 210, y=self.__hauteur*(3/7))
         self.__boutton_jeu2.place(x=10, y=self.__hauteur - 30)
-        self.__window.bind('<o>', self.regles)
+        
 
         # Affichage des scores
         self.__liste_score = self.get_score()
@@ -284,19 +284,6 @@ class Menu:
                                  fg='#00006c', justify='center')
         self.__scores.place(x=self.__largeur/2 - 200, y=self.__hauteur-30)
         self.__window.mainloop()
-
-    def regles(self, event=None):
-        """
-        Entrée : event (optionnel)
-        Sortie : None
-        But : afficher une fenêtre avec les règles du jeu
-        """
-        f_regles = tk.Toplevel()
-        meme = tk.PhotoImage(file='johnpork.png')
-        f_regles.geometry(f"{meme.width()}x{meme.height()}")
-        label = tk.Label(f_regles, image=meme)
-        label.pack()
-        f_regles.mainloop()
 
     def difficulty(self):
         """Entrée/Sortie : None | But : définir la difficulté sur 1"""
@@ -333,6 +320,7 @@ if __name__ == "__main__":
     """Point d entrée du programme"""
     root = tk.Tk()
     Menu(root, None)
+
 
 
 
