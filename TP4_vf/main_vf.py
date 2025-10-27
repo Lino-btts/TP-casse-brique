@@ -24,7 +24,7 @@ INITIAL_LIVES = 3
 
 class Fenetre:
     """Classe principale du jeu Casse-Brique.
-    Gère l'interface, les objets (balles, raquettes, briques), et la logique du jeu.
+    Gère l interface, les objets (balles, raquettes, briques), et la logique du jeu.
     """
 
     def __init__(self, window, difficulte):
@@ -235,7 +235,7 @@ class Menu:
         But : créer le menu d’accueil du jeu
         """
         self.__window = root
-        self.__photo = tk.PhotoImage(file='cassebrique.png')
+        self.__photo = tk.PhotoImage(file=cassebrique.png')
         self.__largeur = self.__photo.width()
         self.__hauteur = self.__photo.height()
         self.__window.geometry(f"{self.__largeur}x{self.__hauteur}")
@@ -330,9 +330,10 @@ class Menu:
 
 
 if __name__ == "__main__":
-    """Point d’entrée du programme"""
+    """Point d entrée du programme"""
     root = tk.Tk()
     Menu(root, None)
+
 
 
 
