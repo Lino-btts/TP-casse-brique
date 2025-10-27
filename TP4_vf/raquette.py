@@ -1,12 +1,18 @@
-import tkinter as tk
+# codé en utf 8
+# Date : du 06/10/2025 au 27/10/2025 
+# Auteurs : Rayane Chekatt / Lino Battesti
+# Le programme permet de créer la raquette et de gérer son mouvement.
+# To do list : None
+
+from tkinter import Canvas
 
 class Raquette:
     """Classe représentant la raquette contrôlée par le joueur."""
 
-    def __init__(self, canvas, width=100, height=12):
+    def __init__(self, canvas: Canvas, width=100, height=12):
         """
         Entrée :
-            - canvas (tk.Canvas) : zone de dessin du jeu
+            - canvas (Canvas) : zone de dessin du jeu
             - width (int) : largeur de la raquette
             - height (int) : hauteur de la raquette
         Sortie : None
@@ -19,9 +25,13 @@ class Raquette:
         # Position de départ centrée horizontalement
         start_x = (800 - width) / 2
         start_y = 600 - 40  # légèrement au-dessus du bas de la fenêtre
-        self.id = canvas.create_rectangle(start_x, start_y,
-                                          start_x + width, start_y + height,
-                                          fill="blue")
+
+        self.id = canvas.create_rectangle(
+            start_x, start_y,
+            start_x + width, start_y + height,
+            fill="blue" )
+        
+
         self.x = 0  # vitesse horizontale
         self.canvas_width = 800
         self.move_speed = 10  # vitesse de déplacement par tick
@@ -44,8 +54,7 @@ class Raquette:
         Sortie : None
         But : mettre à jour la position de la raquette en fonction de sa vitesse
         """
-        coords = self.canvas.coords(self.id)
-        x1, y1, x2, y2 = coords
+        x1, y1, x2, y2 = self.canvas.coords(self.id)
 
         # Nouvelles coordonnées en fonction du déplacement horizontal
         new_x1 = x1 + self.x
@@ -54,7 +63,7 @@ class Raquette:
         # Gestion des limites de l’écran
         if new_x1 < 0:  # à gauche
             new_x1 = 0
-            new_x2 = new_x1 + self.width
+            new_x2 = self.width
         if new_x2 > self.canvas_width:  # à droite
             new_x2 = self.canvas_width
             new_x1 = new_x2 - self.width
@@ -65,4 +74,3 @@ class Raquette:
     def coords(self):
         """Entrée : None | Sortie : liste [x1, y1, x2, y2] | But : retourner la position actuelle"""
         return self.canvas.coords(self.id)
-  
